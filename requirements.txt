@@ -1,0 +1,4 @@
+sounddevice
+scipy
+SpeechRecognition
+pydub
