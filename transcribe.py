@@ -18,7 +18,7 @@ def record_and_save_audio(seconds, fs, f_name):
 # TRANSCRIBE AUDIO FILE BY CHUNKS
 # SOURCE: https://thepythoncode.com/article/using-speech-recognition-to-convert-speech-to-text-python#google_vignette
 # recognize speech in the audio file (avoids repetition)
-def transcribe_audio(path):
+def transcribe_audio(path, r):
     # use the audio file as the audio source
     with sr.AudioFile(path) as source:
         audio_listened = r.record(source)
@@ -69,14 +69,12 @@ def get_large_audio_transcription_on_silence(path):
 
 if __name__ == '__main__':
     sample_rate = 44100
-    secs = 2  # Duration of recording
+    secs = 10  # Duration of recording
     filename = 'output.wav'
     print(f'You have {secs} seconds to speak.')
     record_and_save_audio(secs, sample_rate, filename)
-    print('Recorded.')
+    print('Recorded.\n')
 
     # create a speech recognition object
     r = sr.Recognizer()
-
-    path = filename
-    print("\nFull text:", get_large_audio_transcription_on_silence(path))
+    print(f"\nFull text: {get_large_audio_transcription_on_silence(filename, r)}")
