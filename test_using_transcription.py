@@ -32,6 +32,7 @@ def transcribe_audio(path, r):
 def get_large_audio_transcription_on_silence(path, r):
     """Splitting the large audio file into chunks
     and apply speech recognition on each of these chunks"""
+
     # open the audio file using pydub
     sound = AudioSegment.from_file(path)
     # split audio sound where silence is 500 miliseconds or more and get chunks
@@ -60,11 +61,25 @@ def get_large_audio_transcription_on_silence(path, r):
             text = f"{text.capitalize()}. "
             print(chunk_filename, ":", text)
             whole_text += text
-    # return the text for all chunks detected
+    # instead of returning whole text,
+    # should yield one smaller text segment at a time
     return whole_text
 
 
 if __name__ == '__main__':
+    # super inefficient; this takes the entire audio file
+    # then chunks entire audio file
+    # then loops through each chunk to transcribe it
+
+    # we should actually:
+    # 1) as we're recording -> we chunk
+    # 2) yield one chunk to speech recognizer
+    # 3) transcribe one chunk
+    # 4) stream chunks to LLM
+
+    # but this file lets us have a whole text to start working with LLM to question the text
+    # we can figure out better structure later
+
     sample_rate = 44100
     secs = 10  # Duration of recording
     filename = 'output.wav'
@@ -74,4 +89,14 @@ if __name__ == '__main__':
 
     # create a speech recognition object
     r = sr.Recognizer()
-    print(f"\nFull text: {get_large_audio_transcription_on_silence(filename, r)}")
+    full_text = get_large_audio_transcription_on_silence(filename, r)
+    print(f"\nFull text: {full_text}")
+
+    # can use sentiment analysis to also tell user how they came off
+    # like "you sounded overly arrogant" or "you sounded unsure/sad"
+    # https://realpython.com/python-nltk-sentiment-analysis/
+
+    """"
+    stuff that could help us out:
+    - https://towardsdatascience.com/questgen-an-open-source-nlp-library-for-question-generation-algorithms-1e18067fcdc6
+    """
