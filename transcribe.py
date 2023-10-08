@@ -29,18 +29,15 @@ def transcribe_audio(path, r):
 
 # splits the audio file into chunks on silence
 # and applies speech recognition
-def get_large_audio_transcription_on_silence(path):
+def get_large_audio_transcription_on_silence(path, r):
     """Splitting the large audio file into chunks
     and apply speech recognition on each of these chunks"""
     # open the audio file using pydub
     sound = AudioSegment.from_file(path)
     # split audio sound where silence is 500 miliseconds or more and get chunks
     chunks = split_on_silence(sound,
-        # experiment with this value for your target audio file
         min_silence_len = 500,
-        # adjust this per requirement
         silence_thresh = sound.dBFS-14,
-        # keep the silence for 1 second, adjustable as well
         keep_silence=500,
     )
     folder_name = "audio-chunks"
@@ -56,7 +53,7 @@ def get_large_audio_transcription_on_silence(path):
         audio_chunk.export(chunk_filename, format="wav")
         # recognize the chunk
         try:
-            text = transcribe_audio(chunk_filename)
+            text = transcribe_audio(chunk_filename, r)
         except sr.UnknownValueError as e:
             print("Error:", str(e))
         else:
