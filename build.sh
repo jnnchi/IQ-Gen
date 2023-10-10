@@ -1,10 +1,10 @@
 # RUN THIS FILE TO INSTALL ALL LIBRARIES
+# if this file doesn't run, run:
+# chmod +x build.sh
+# ./build.sh
 
 # for speech to text
-pip install sounddevice
-pip install scipy
-pip install SpeechRecognition
-pip install pydub
+pip install sounddevice scipy SpeechRecognition pydub nltk spacy
 
 # install homebrew
 # actually u don't need to do this anymore lol
