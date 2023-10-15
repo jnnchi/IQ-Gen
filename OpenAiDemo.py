@@ -2,7 +2,7 @@ import os
 import openai
 
 # Load your API key from an environment variable or secret management service
-openai.api_key = "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"
+openai.api_key = "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"
 
 chat_completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Hello world"}])
 
