@@ -2,6 +2,9 @@ import os
 from openai import OpenAI
 
 # Load your API key from an environment variable or secret management service
+# before running this file, run in terminal:
+# export OPENAI_API_KEY=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
+# otherwise you will get an error
 client = OpenAI(api_key="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")
 
 chat_completion = client.chat.completions.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Hello world"}])
