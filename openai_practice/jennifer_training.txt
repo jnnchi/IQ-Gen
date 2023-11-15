@@ -1,0 +1,15 @@
+Sentence: Hello, my name is John Jones. I’m currently a software engineer at Google and have a wide breadth of experience researching and designing software programs and innovative solutions that solve real-world problems. I’ve developed new architecture for network equipment systems, from routers to voice-enabled network applications. I’ve been a huge fan of your company for years, and saw that you had an opening for a principal software engineer manager. I would love to be considered for this position.
+Question: Hello John Jones! Can you describe a particularly challenging software program you researched and designed? 
+Question: What innovative solutions did you implement to overcome those challenges?
+Sentence: Hi, I’m Sally Smith. As a civil engineering manager at General Motors for the past two years, I’ve led multiple cross-functional teams in conceiving, designing, and maintaining large infrastructure projects in the public and private sectors. Notably, utilizing my geotechnical engineering experience, I was recently able to move forward on developing a large chip manufacturing facility for a major company.
+Question: Hello Sally Smith! Can you walk us through the most challenging geotechnical engineering problem you faced in your infrastructure projects and how you resolved it? 
+Question: As a manager leading cross-functional teams, how do you ensure effective communication and collaboration among team members with diverse expertise?
+Sentence: I'm Alex Rodriguez, a network security specialist with Cisco Systems, where I have developed and implemented robust security protocols for our cloud services. My expertise lies in cybersecurity, threat analysis, and developing scalable security solutions.
+Question: Can you describe a complex cybersecurity threat you encountered and how you developed a solution for it?
+Question: How do you approach the balance between robust security and user accessibility in your designs?
+Question: What strategies do you employ for staying ahead of emerging cybersecurity threats in cloud services?
+Sentence: My name is Emily Chen, and I am a data scientist with a focus on machine learning and AI at Amazon. I have led projects involving predictive analytics and natural language processing, contributing significantly to improving user experience and personalization in our services.
+Question: Can you share an example of a predictive analytics project you led at Amazon and the impact it had?
+Question: How have you approached challenges in natural language processing, especially regarding model accuracy and efficiency?
+Question: In your role, how have you ensured the ethical use of AI and machine learning, particularly in user data handling?
+
