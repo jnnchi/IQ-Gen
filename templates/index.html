@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Recorder and Transcriber</title>
+    <link href="{{url_for('static',filename='styles.css')}}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <button id="start-record-btn">Start Recording</button>
+    <button id="stop-record-btn" disabled>Stop Recording</button>
+    <p id="transcript"></p>
+    <p id="result"></p>
+
+    <script src="{{url_for('static',filename='script.js')}}"></script>
+</body>
+</html>

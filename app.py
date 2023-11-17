@@ -1,14 +1,13 @@
-# SOURCE: https://www.youtube.com/watch?v=5_tkPG-po1g
-
+from flask import Flask, request, jsonify, render_template
 from openai import OpenAI
 
+
+app = Flask(__name__)
 client = OpenAI(api_key='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')
-import gradio as gr
+
 
 def openai_chat(input_prompt):
-    # the template teaches openai api what u want to achieve
-    # i stored it in another file for more readability
-    with open('jennifer_template.txt', 'r') as file:
+    with open('/Users/jennifer/VSCodeProjects/LLM-Interviewer/openai_practice/jennifer_template.txt', 'r') as file:
         template = file.read()
 
     # when user enters a new sentence, they obviously won't type "Sentence: " first, so we do that
@@ -32,7 +31,19 @@ def openai_chat(input_prompt):
     if out_index:
         return output_list[min(out_index):max(out_index) + 1]
 
-gr.Interface(fn=openai_chat, inputs=['text'], outputs=['text']).launch(debug=True)
+@app.route('/analyze_transcript', methods=['POST'])
+def analyze_transcript():
+    data = request.json
+    transcript = data['transcript']
+    
+    analysis_result = openai_chat(transcript)
 
-# SAMPLE INPUTS FOR TESTING:
-"""Hey, I’m Jamie Brown. I’ve just received my double bachelor’s degree in computer science and business administration. I’ve held three internships where I’ve had to create reports, develop new programs, and pitch projects to the wider team. My current focus is getting a job in project management."""
+    print(analysis_result)
+    return jsonify({'message': 'Transcript received', 'analysis': analysis_result})
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
