@@ -55,7 +55,7 @@ function sendTranscriptToServer(transcript) {
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data);
-        resultElement.textContent = data['analysis'];
+        resultElement.textContent = data['questions'];
     })
     .catch((error) => {
         console.error('Error:', error);

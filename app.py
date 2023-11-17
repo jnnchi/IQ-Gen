@@ -5,8 +5,8 @@ from openai import OpenAI
 app = Flask(__name__)
 client = OpenAI(api_key='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')
 
-
-def openai_chat(input_prompt):
+# function from jennifer_openai.py
+def generate_questions(input_prompt):
     with open('/Users/jennifer/VSCodeProjects/LLM-Interviewer/openai_practice/jennifer_template.txt', 'r') as file:
         template = file.read()
 
@@ -31,19 +31,26 @@ def openai_chat(input_prompt):
     if out_index:
         return output_list[min(out_index):max(out_index) + 1]
 
+def analyze_tone(text_input):
+    return text_input.upper()
+
 @app.route('/analyze_transcript', methods=['POST'])
 def analyze_transcript():
     data = request.json
     transcript = data['transcript']
     
-    analysis_result = openai_chat(transcript)
+    questions = generate_questions(transcript)
+    tone_analyzis = analyze_tone(transcript)
 
-    print(analysis_result)
-    return jsonify({'message': 'Transcript received', 'analysis': analysis_result})
+    print(questions)
+    return jsonify({'message': 'Transcript received', 'questions': questions, 'tone analysis': tone_analyzis})
 
+# homepage
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
