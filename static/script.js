@@ -1,3 +1,4 @@
+/* ------------------ SPEECH RECOGNITION --------------------- */
 window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
 // init speechrecog object + built in variables
@@ -7,7 +8,8 @@ recognition.lang = 'en-US';
 
 // text to insert 
 let transcriptElement = document.getElementById('transcript');
-let resultElement = document.getElementById('result');
+let questionsElement = document.getElementById('questions');
+let toneElement = document.getElementById('tone-analysis');
 
 // buttons
 let startButton = document.getElementById('start-record-btn');
@@ -28,7 +30,7 @@ recognition.addEventListener('result', e => {
 });
 recognition.addEventListener('end', recognition.start);
 
-// button behavior when clicked
+// START AND STOP RECORDING BUTTONS
 startButton.addEventListener('click', () => {
     recognition.start();
     // can't keep clicking start once u start
@@ -42,7 +44,7 @@ stopButton.addEventListener('click', () => {
     sendTranscriptToServer(transcriptElement.textContent);
 });
 
-// function to send transcript to flask server
+// SEND FINAL RANSCRIBED SPEECH TO FLASK SERVER
 // SOURCE: https://www.geeksforgeeks.org/pass-javascript-variables-to-python-in-flask/
 function sendTranscriptToServer(transcript) {
     fetch('/analyze_transcript', {
@@ -52,10 +54,11 @@ function sendTranscriptToServer(transcript) {
         },
         body: JSON.stringify({ transcript: transcript })
     })
-    .then(response => response.json())
+    .then(response => response.json()) // get the flask response
     .then(data => {
         console.log('Success:', data);
-        resultElement.textContent = data['questions'];
+        questionsElement.textContent = data['questions'];
+        toneElement.textContent = data['tone analysis']
     })
     .catch((error) => {
         console.error('Error:', error);
