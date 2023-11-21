@@ -1,6 +1,7 @@
 # gabe's implementation of GPT
-
 from openai import OpenAI
+
+client = OpenAI()
 import os
 
 client = OpenAI(api_key='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')
@@ -32,10 +33,8 @@ def chatbot():
         messages.append({"role": "user", "content": message})
 
         # Request gpt-3.5-turbo for chat completion
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=messages
-        )
+        response = client.chat.completions.create(model="gpt-3.5-turbo",
+        messages=messages)
 
         # Print the response and add it to the messages list
         chat_message = response['choices'][0]['message']['content']
