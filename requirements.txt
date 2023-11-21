@@ -1,4 +1,2 @@
-sounddevice
-scipy
-SpeechRecognition
-pydub
+Flask
+openai
