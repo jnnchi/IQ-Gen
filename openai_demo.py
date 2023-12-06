@@ -1,4 +1,5 @@
 import os
+
 from openai import OpenAI
 
 # Load your API key from an environment variable or secret management service
