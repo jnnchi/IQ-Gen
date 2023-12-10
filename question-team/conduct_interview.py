@@ -4,6 +4,10 @@ from openai import OpenAI
 # Set your OpenAI API key
 client  = OpenAI(api_key='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')
 
+# get list of keywords
+with open('keywords.txt','r') as file:
+    KEYWORDS = [line.strip() for line in file.readlines()]
+
 # Define a function for the interview simulation
 def conduct_interview():
     interview_prompt = "I want you to act as an interviewer. I will be the candidate and you will ask me the interview questions for the entry-level software engineer position. \
