@@ -4,9 +4,18 @@ from openai import OpenAI
 # Set your OpenAI API key
 client  = OpenAI(api_key='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')
 
+KEYWORDS = ''
 # get list of keywords
 with open('keywords.txt','r') as file:
-    KEYWORDS = [line.strip() for line in file.readlines()]
+    for word in [line.strip() + ' ' for line in file.readlines()]:
+        KEYWORDS += word.lower()
+
+
+def process_interview_response(model_response):
+    sentences = model_response.split('. ')
+    questions_only = [sentence for sentence in sentences if sentence.endswith('?')]
+    filtered_response = '. '.join(questions_only)
+    return filtered_response
 
 # Define a function for the interview simulation
 def conduct_interview():
@@ -18,13 +27,25 @@ def conduct_interview():
     
     while "Thank you for your response" not in interview_response:
         user_response = input("Candidate: ")  # User (interviewee) responds to the question
-        interview_prompt += "\nInterviewer: " + user_response
-        interview_response = client.completions.create(
-            model="text-davinci-003",
-            prompt=interview_prompt,
-            max_tokens=50
-        ).choices[0].text.strip()
-        print(interview_response)  # OpenAI API (interviewer) asks the next question
+        found_keywords = [word for word in user_response.lower().split() if word in KEYWORDS]
+        if found_keywords:
+            # Constructing a question that includes all found keywords
+            keywords_as_str = " and ".join([f"{word}" for word in found_keywords])
+            interview_prompt += f"\nInterviewer: Can you elaborate on {keywords_as_str}? Could you describe specific projects or tasks where you utilized these skills?" + user_response
+        else:
+            # If no keywords are detected, continue with a general question
+            interview_prompt += "\nInterviewer: " + user_response
+
+        interview_response = False
+        while not interview_response:
+            interview_prompt += "\nInterviewer: " + user_response
+            interview_response = client.completions.create(
+                model="text-davinci-003",
+                prompt=interview_prompt,
+                max_tokens=50
+            ).choices[0].text.strip()
+            interview_response = process_interview_response(interview_response) or False
+        print(interview_response)
 
 # Start the interview
 print("Welcome to the software engineering interview. Please respond to the questions as the candidate.")
