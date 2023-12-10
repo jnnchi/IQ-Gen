@@ -11,11 +11,14 @@ with open('keywords.txt','r') as file:
         KEYWORDS += word.lower()
 
 
-def process_interview_response(model_response):
+def process_interview_response(model_response, asked):
     sentences = model_response.split('. ')
     questions_only = [sentence for sentence in sentences if sentence.endswith('?')]
     filtered_response = '. '.join(questions_only)
-    return filtered_response
+    if filtered_response not in asked:
+        asked.add(filtered_response)
+        return filtered_response
+    return False
 
 # Define a function for the interview simulation
 def conduct_interview():
@@ -25,6 +28,8 @@ def conduct_interview():
         My first sentence is 'Hi'."
     interview_response = ""
     
+    asked_questions = set()
+
     while "Thank you for your response" not in interview_response:
         user_response = input("Candidate: ")  # User (interviewee) responds to the question
         found_keywords = [word for word in user_response.lower().split() if word in KEYWORDS]
@@ -44,7 +49,7 @@ def conduct_interview():
                 prompt=interview_prompt,
                 max_tokens=50
             ).choices[0].text.strip()
-            interview_response = process_interview_response(interview_response) or False
+            interview_response = process_interview_response(interview_response, asked_questions) or False # False if no questions or if question was already asked
         print(interview_response)
 
 # Start the interview
