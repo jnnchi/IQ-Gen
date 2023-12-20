@@ -34,3 +34,5 @@ while 'Thanks!' not in user_response:
     print(feedback)
 
 print('Great Job! Feel free to come back soon my friend!')
+
+# there still might be a bug in this code somewhere

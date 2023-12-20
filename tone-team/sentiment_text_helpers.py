@@ -30,20 +30,25 @@ system_messages = {
     'remorse': 'This reply carries a touch of remorse. Learn from any missteps and approach your next reply with a renewed focus on improvement.',
     'sadness': 'Sadness is apparent your reply here. Use this as motivation to address concerns and present a more positive demeanor in the next opportunity.',
     'surprise': 'Surprise is reflected in this response. Try to be ready for unexpected questions in future questions.',
-    'neutral': 'Your response seemed neutral here. While this isnt a outstanding concern concerns, try to sound a little more excited next question.'
+    'neutral': 'Your response seemed neutral here. While this isnt an outstanding concern, try to sound a little more excited next question.'
 }
 
 overused_words = {
-    'amazing': 'Lastly, not to use the word \'amazing\' too much. It tends to be overused in interviews.',
-    'actually': 'You also used the word \'acually\', which is often used to correct people, and thus has incurred a negative meaning. Make sure to double-check your usage of it, you dont want to be correcting your interviewer.',
-    'basically': 'Additionaly, using \'basically\' can make you seem like you are over-simplifying, and can make you seem unprofessional. Try to avoid it.',
-    'fired': 'Also, try not to use the negatively charged word \'fired\'. Instead, try using \'laid off\' or \'let go\'',
-    'just': 'Take note of when you use the word \'just\', it usually is either a filler word or a defensive word.',
-    'kinda': 'Also, try to not use the word \'kinda\' next time. It isnt the most professional word choice.',
-    'whatever': 'Your use of the word \'whatever\' also has a ring of unprofessionalism, so watch that one next time.'
+    'amazing': ' Lastly, not to use the word \'amazing\' too much. It tends to be overused in interviews.',
+    'actually': ' You also used the word \'acually\', which is often used to correct people, and thus has incurred a negative meaning. Make sure to double-check your usage of it, you dont want to be correcting your interviewer.',
+    'basically': ' Additionaly, using \'basically\' can make you seem like you are over-simplifying, and can make you seem unprofessional. Try to avoid it.',
+    'fired': ' Also, try not to use the negatively charged word \'fired\'. Instead, try using \'laid off\' or \'let go\'',
+    'just': ' Take note of when you use the word \'just\', it usually is either a filler word or a defensive word.',
+    'kinda': ' Also, try to not use the word \'kinda\' next time. It isnt the most professional word choice.',
+    'whatever': ' Your use of the word \'whatever\' also has a ring of unprofessionalism, so watch that one next time.'
 }
 
-disallowed_words = {}
+disallowed_words = {
+    'lazy', 'murder', 'killed', 'arson', 'damn', 'shit', 'fuck', 'crap', 'bro', 'bruh', 'dang', 'poop',
+    'laziness', 'bugger', 'pissed', 'bitch', 'asshole', 'bullshit', 'damn', 'son of a bitch', 'bastard',
+    'loser', 'slept', 'hate', 'screw you', 'i hate', 'burnt down', 'burn down', 'assult', 'stole', 'beat up',
+    'dont care', 'suck', 'kidnapped', 'prison', 'jail', 'kill', 'die'
+}
 
 
 def flag_um(plaintext: str) -> str:
@@ -61,13 +66,11 @@ def flag_overused_words(plaintext: str) -> str:
     for word in overused_words:
         if word in plaintext:
             return overused_words[word]
-        else:
-            return ''
+    return ''
 
 
 def flag_disallowed_words(plaintext: str) -> str:
-    for word in overused_words:
+    for word in disallowed_words:
         if word in plaintext:
             return ' You also really should avoid using the word ' + word + ' in your response.'
-        else:
-            return ''
+    return ''
