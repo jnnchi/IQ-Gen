@@ -2,7 +2,7 @@ import os
 from openai import OpenAI
 
 # Set your OpenAI API key
-client  = OpenAI(api_key='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')
+client  = OpenAI(api_key='sk-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')
 
 KEYWORDS = ''
 # get list of keywords
