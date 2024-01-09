@@ -2,7 +2,7 @@ import os
 from openai import OpenAI
 
 # Set your OpenAI API key
-client  = OpenAI(api_key='sk-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')
+client  = OpenAI(api_key='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')
 
 KEYWORDS = ''
 # get list of keywords
@@ -45,7 +45,7 @@ def conduct_interview():
         while not interview_response:
             interview_prompt += "\nInterviewer: " + user_response
             interview_response = client.completions.create(
-                model="text-davinci-003",
+                model="gpt-3.5-turbo-instruct",
                 prompt=interview_prompt,
                 max_tokens=50
             ).choices[0].text.strip()
