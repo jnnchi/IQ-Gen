@@ -1,3 +1,31 @@
 body {
-    background-color: yellow;
+    background-color: white;
+    font-family: "Arial", sans-serif;
+    margin: auto;
+    margin-top: 50px;
+    justify-content: center;
+    text-align: center;
+}
+
+button {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid #000;
+    color: #fff;
+    background-color: #000;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+h2 {
+    font-style: italic;
 }

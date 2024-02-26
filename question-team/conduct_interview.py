@@ -6,7 +6,7 @@ client  = OpenAI(api_key='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')
 
 KEYWORDS = ''
 # get list of keywords
-with open('keywords.txt','r') as file:
+with open('/Users/jennifer/VSCodeProjects/LLM-Interviewer/question-team/keywords.txt','r') as file:
     for word in [line.strip() + ' ' for line in file.readlines()]:
         KEYWORDS += word.lower()
 
