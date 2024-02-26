@@ -3,6 +3,7 @@ from openai import OpenAI
 import requests
 import sentiment_text_helpers
 
+
 app = Flask(__name__)
 openai_client = OpenAI(api_key='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')
 hf_api_url = "https://api-inference.huggingface.co/models/SamLowe/roberta-base-go_emotions"
@@ -27,7 +28,6 @@ def analyze_tone(user_response):
     )
 
     return feedback
-
 
 def generate_questions(input_prompt):
     with open('/Users/jennifer/VSCodeProjects/LLM-Interviewer/openai_practice/jennifer_template.txt', 'r') as file:
@@ -54,26 +54,23 @@ def generate_questions(input_prompt):
     if out_index:
         return output_list[min(out_index):max(out_index) + 1]
 
-
-@app.route('/analyze_transcript', methods=['POST'])
+@app.route('/analyze_transcript', methods=['POST']) 
 def analyze_transcript():
     # get data from speech recognition
     data = request.json
     transcript = data['transcript']
-    
-    # run question gen on transcript
-    questions = generate_questions(transcript)
-    # run tone analysis on transcript
-    tone_analyzis = analyze_tone(transcript)
 
-    print(questions)
+    # run question gen on transcript
+    questions = f"Next interview question: {generate_questions(transcript)}"
+    # run tone analysis
+    tone_analyzis = f"Your tone result: {analyze_tone(transcript)}"
+
     return jsonify({'message': 'Transcript received', 'questions': questions, 'tone analysis': tone_analyzis})
 
 # homepage
 @app.route('/')
 def index():
     return render_template('index.html')
-
 
 
 if __name__ == '__main__':

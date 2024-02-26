@@ -12,9 +12,12 @@
     <button id="start-record-btn">Start Recording</button>
     <button id="stop-record-btn" disabled>Stop Recording</button>
     <p id="transcript"></p>
-    <p id="questions"></p>
-    <p id="tone-analysis"></p>
-
+    <div class="output">
+        <h2>Record a response, and we'll output an evaluation here:</h2>
+        <p id="tone-analysis"></p>
+        <p id="questions"></p>
+    </div>
+    <button id="next-question">Next Question</button>
     <script src="{{url_for('static',filename='script.js')}}"></script>
 </body>
 </html>

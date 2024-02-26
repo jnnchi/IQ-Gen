@@ -26,6 +26,15 @@ button:hover {
     color: #000;
 }
 
+#end {
+    margin-top: 20px;
+}
+
 h2 {
     font-style: italic;
+}
+
+.output {
+    border: 1px solid black;
+    margin: 50px 50px 50px 50px;
 }
