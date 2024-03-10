@@ -54,9 +54,7 @@ def transcribe_audio(chunk_path: str) -> str:
 # Here's where you can test the function
 #
 if input('Type Y: ').lower() == 'y':
+    print('Its recording now!')
     record_audio()
     print('transcribing...')
     print(transcribe_audio('audio_temp/audio_block.wav'))
-
-
-print(transcribe_audio(input('Input file path here:')))
