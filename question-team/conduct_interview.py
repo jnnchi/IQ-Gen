@@ -5,6 +5,7 @@ from openai import OpenAI
 client  = OpenAI(api_key='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')
 
 KEYWORDS = ''
+KEYWORDS_FILE_PATH = os.path.join(os.path.dirname(__file__), 'keywords.txt')
 # get list of keywords
 with open('/Users/jennifer/VSCodeProjects/LLM-Interviewer/question-team/keywords.txt','r') as file:
     for word in [line.strip() + ' ' for line in file.readlines()]:
