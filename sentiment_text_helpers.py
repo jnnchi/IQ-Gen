@@ -1,6 +1,8 @@
 # this is a list of messages that corraspond to the top emotions that your text contains
 # note that these are all written in a way that makes them only good for giving the #1 bit of feedback to a response
 # we may want to go for a different system of making these, like small pieces spliced together, but this works for now
+from openai import OpenAI
+
 
 system_messages = {
     'admiration': 'The top emotion displayed within your response is admiration. Thats a great way to show the interviewer youre interested!',
@@ -74,3 +76,19 @@ def flag_disallowed_words(plaintext: str) -> str:
         if word in plaintext:
             return ' You also really should avoid using the word ' + word + ' in your response.'
     return ''
+
+client = OpenAI(api_key='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')
+
+def give_sentiment(completed_interview_transcript: str):
+    """
+    Uses GPT-3.5 Turbo to give a short analysis of how the interview went.
+    """
+    response = client.chat.completions.create(
+    model='gpt-3.5-turbo',
+    messages=[
+        {"role": "system", "content": f"You are an human resources representative at a tech company, who is reviewing my interview that was just completed, the {completed_interview_transcript}. focus on three key points, but format it like a response to the user."},
+        {"role": "user", "content": "How did my interview go! Please tell me the things I did well in my interview, and the things that I could improve upon!"},
+    ],
+    temperature=0,
+    )
+    return response.choices[0].message.content
