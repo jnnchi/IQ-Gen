@@ -30,6 +30,8 @@ recognition.addEventListener('result', e => {
 });
 recognition.addEventListener('end', recognition.start);
 
+
+
 // START AND STOP RECORDING BUTTONS
 startButton.addEventListener('click', () => {
     recognition.start();
