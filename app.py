@@ -3,7 +3,6 @@ from openai import OpenAI
 import requests
 import sentiment_text_helpers
 
-
 app = Flask(__name__)
 openai_client = OpenAI(api_key='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')
 hf_api_url = "https://api-inference.huggingface.co/models/SamLowe/roberta-base-go_emotions"
@@ -71,6 +70,27 @@ def analyze_transcript():
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
+@app.route('/whisper', methods=['POST']) 
+def transcribe_audio(audio_file):
+    """Takes a file path for an audio file and transcribes it into a string"""
+    if 'audio_data' not in request.files:
+        return jsonify({'message': 'No file part'}), 400
+
+    audio_file = request.files['audio_data']
+    
+    transcript = openai_client.audio.transcriptions.create(
+        model="whisper-1",
+        file=audio_file.read(),
+    ) 
+
+    # run question gen on transcript
+    questions = f"Next interview question: {generate_questions(transcript)}"
+    # run tone analysis
+    tone_analyzis = f"Your tone result: {analyze_tone(transcript)}"
+
+    return jsonify({'message': 'Transcript received', 'questions': questions, 'tone analysis': tone_analyzis})
 
 
 if __name__ == '__main__':
