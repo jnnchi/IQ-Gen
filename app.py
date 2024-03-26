@@ -30,7 +30,7 @@ def analyze_tone(user_response):
     return feedback
 
 def generate_questions(input_prompt):
-    with open('/Users/jennifer/VSCodeProjects/LLM-Interviewer/openai_practice/jennifer_template.txt', 'r') as file:
+    with open('openai_practice/jennifer_template.txt', 'r') as file:
         template = file.read()
 
     # when user enters a new sentence, they won't type "Sentence: " first, so we do that
