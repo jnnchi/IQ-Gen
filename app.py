@@ -2,6 +2,10 @@ from flask import Flask, request, jsonify, render_template
 from openai import OpenAI
 import requests
 import sentiment_text_helpers
+import ffmpeg
+from pydub import AudioSegment
+from google.cloud import storage # pip install google-cloud-storage 
+import os
 
 app = Flask(__name__)
 openai_client = OpenAI(api_key='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')
@@ -73,16 +77,41 @@ def index():
 
 
 @app.route('/whisper', methods=['POST']) 
-def transcribe_audio(audio_file):
+def transcribe_audio():
     """Takes a file path for an audio file and transcribes it into a string"""
+    
+    print("CALLED")
     if 'audio_data' not in request.files:
         return jsonify({'message': 'No file part'}), 400
 
+    # https://werkzeug.palletsprojects.com/en/3.0.x/datastructures/
+    # audio file is type werkzeug.datastructures.file_storage.FileStorage
+    # has attributes .stream, .filename, .content_type
+    # has method .read() that reads it to bytes
     audio_file = request.files['audio_data']
+    print(
+        f""" {audio_file.stream=}\n
+        {audio_file.filename=}\n
+        {audio_file.content_type=}"""
+    )
+    # https://stackoverflow.com/questions/20015550/read-file-data-without-saving-it-in-flask
+    """
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = app.config['GOOGLE_APPLICATION_CREDENTIALS']
+    storage_client = storage.Client()
+    bucket = storage_client.bucket("name")
+    # Upload file to Google Bucket
+    blob = bucket.blob(audio_file.filename) 
+    blob.upload_from_string(audio_file.read())
+    print(blob)
+    """
+
+    audio_file.save(dst='audio.wav')
+
+    wav_file = AudioSegment.from_file(file="audio.wav",format="wav")
     
     transcript = openai_client.audio.transcriptions.create(
         model="whisper-1",
-        file=audio_file.read(),
+        file=wav_file,
     ) 
 
     # run question gen on transcript
@@ -94,4 +123,4 @@ def transcribe_audio(audio_file):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=7000, debug=True)

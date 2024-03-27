@@ -39,6 +39,10 @@ function startRecording() {
         audioBlobs = [];
         capturedStream = stream;
 
+        // TESTING
+        console.log("started")
+
+        // choosing the type of audio to get from
         let options = { mimeType: 'audio/webm' }; // use WebM for broader support
         if (!MediaRecorder.isTypeSupported(options.mimeType)) {
             console.error(`${options.mimeType} is not supported, trying different format.`);
@@ -49,13 +53,18 @@ function startRecording() {
             }
         }
 
+        // create media recorder object
         mediaRecorder = new MediaRecorder(stream, options);
+        
+        console.log("CREATED MEDIA RECORDER")
 
         mediaRecorder.addEventListener('dataavailable', event => {
             audioBlobs.push(event.data);
+            console.log(event.data)
         });
 
         mediaRecorder.start();
+        console.log("MEDIA RECORDER STARTED")
     }).catch(error => {
         console.error('Error starting recording:', error);
     });
@@ -86,11 +95,15 @@ function stopRecording() {
     });
 }
 
-function sendAudioToServer(audioBlob) {
+async function sendAudioToServer(audioBlob) {
+    console.log("SEND AUDIO TO SERVER STARTED")
     const formData = new FormData();
     formData.append('audio_data', audioBlob, 'recording.wav');
 
-    fetch('/whisper', {
+    console.log(audioBlob)
+    console.log(formData.entries)
+
+    await fetch('/whisper', {
         method: 'POST',
         cache: 'no-cache',
         body: formData
