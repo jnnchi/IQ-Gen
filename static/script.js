@@ -38,6 +38,7 @@ function startRecording() {
     }).then(stream => {
         audioBlobs = [];
         capturedStream = stream;
+        console.log("this is working")
 
         // TESTING
         console.log("started")
@@ -118,6 +119,7 @@ async function sendAudioToServer(audioBlob) {
         console.log('Success:', data);
         questionsElement.textContent = data.questions;
         toneElement.textContent = data['tone analysis'];
+        transcriptElement.textContent = data.transcript;
     })
     .catch(error => {
         console.error('Error sending audio to server:', error);

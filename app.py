@@ -2,10 +2,9 @@ from flask import Flask, request, jsonify, render_template
 from openai import OpenAI
 import requests
 import sentiment_text_helpers
-import ffmpeg
 from pydub import AudioSegment
 from google.cloud import storage # pip install google-cloud-storage 
-import os
+from subprocess import call
 
 app = Flask(__name__)
 openai_client = OpenAI(api_key='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')
@@ -45,15 +44,12 @@ def generate_questions(input_prompt):
     
     # extract the text section of completion object
     message = completion.choices[0].text
-    print(f'{message=}')
     
     output_list = message.split('\n')
-    print(f'{output_list=}')
     out_index = []
     for idx, sentence in enumerate(output_list):
         if 'Question' in sentence:
             out_index.append(idx)
-    print(f'{out_index=}')
     if out_index:
         return output_list[min(out_index):max(out_index) + 1]
 
@@ -80,7 +76,6 @@ def index():
 def transcribe_audio():
     """Takes a file path for an audio file and transcribes it into a string"""
     
-    print("CALLED")
     if 'audio_data' not in request.files:
         return jsonify({'message': 'No file part'}), 400
 
@@ -89,37 +84,30 @@ def transcribe_audio():
     # has attributes .stream, .filename, .content_type
     # has method .read() that reads it to bytes
     audio_file = request.files['audio_data']
-    print(
-        f""" {audio_file.stream=}\n
-        {audio_file.filename=}\n
-        {audio_file.content_type=}"""
-    )
-    # https://stackoverflow.com/questions/20015550/read-file-data-without-saving-it-in-flask
-    """
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = app.config['GOOGLE_APPLICATION_CREDENTIALS']
-    storage_client = storage.Client()
-    bucket = storage_client.bucket("name")
-    # Upload file to Google Bucket
-    blob = bucket.blob(audio_file.filename) 
-    blob.upload_from_string(audio_file.read())
-    print(blob)
-    """
 
-    audio_file.save(dst='audio.wav')
+    # initially save to webm (that's the type it's sent in too)
+    audio_file.save(dst='audio.webm')
 
-    wav_file = AudioSegment.from_file(file="audio.wav",format="wav")
+    # convert webm to wav using call function
+    call(['ffmpeg', '-i', 'audio.webm', '-ar', '16000', '-ac', '1', 'audio.wav'])
+
+    # no longer using; can just open file directly
+    # wav_file = AudioSegment.from_file(file="audio.wav", format="wav")
     
-    transcript = openai_client.audio.transcriptions.create(
-        model="whisper-1",
-        file=wav_file,
-    ) 
+    with open('audio.wav', 'rb') as audio_file:
+        transcript = openai_client.audio.transcriptions.create(
+            model="whisper-1",
+            file=audio_file,
+        )
+    
+    transcript = transcript.text
 
     # run question gen on transcript
     questions = f"Next interview question: {generate_questions(transcript)}"
     # run tone analysis
     tone_analyzis = f"Your tone result: {analyze_tone(transcript)}"
 
-    return jsonify({'message': 'Transcript received', 'questions': questions, 'tone analysis': tone_analyzis})
+    return jsonify({'message': 'Transcript received', 'transcript': transcript, 'questions': questions, 'tone analysis': tone_analyzis})
 
 
 if __name__ == '__main__':
