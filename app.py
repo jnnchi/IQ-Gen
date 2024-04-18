@@ -2,9 +2,10 @@ from flask import Flask, request, jsonify, render_template
 from openai import OpenAI
 import requests
 import sentiment_text_helpers
-from pydub import AudioSegment
-from google.cloud import storage # pip install google-cloud-storage 
+#from pydub import AudioSegment
+#from google.cloud import storage # pip install google-cloud-storage 
 from subprocess import call
+import os
 
 app = Flask(__name__)
 openai_client = OpenAI(api_key='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')
@@ -32,7 +33,7 @@ def analyze_tone(user_response):
     return feedback
 
 def generate_questions(input_prompt):
-    with open('/Users/jennifer/VSCodeProjects/LLM-Interviewer/openai_practice/jennifer_template.txt', 'r') as file:
+    with open('template.txt', 'r') as file:
         template = file.read()
 
     # when user enters a new sentence, they won't type "Sentence: " first, so we do that
@@ -101,6 +102,8 @@ def transcribe_audio():
         )
     
     transcript = transcript.text
+    os.remove('audio.webm')
+    os.remove('audio.wav')
 
     # run question gen on transcript
     questions = f"Next interview question: {generate_questions(transcript)}"
