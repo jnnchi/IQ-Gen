@@ -57,7 +57,7 @@ def generate_questions(input_prompt):
         questions = output_list[min(out_index):max(out_index) + 1]
 
     final_output = ""
-    for question in questions:
+    for question in questions[:2]:
         final_output += f"{question[10:]}\n"
     return final_output
 
@@ -128,7 +128,6 @@ def transcribe_audio():
 
     # open convo history file to write to it
     file.write(f"\n{questions}\n")
-    file.write(f"{tone_analyzis}\n")
     file.close()
 
     return jsonify({'message': 'Transcript received', 'transcript': this_answer_transcript, 'questions': questions, 'tone analysis': tone_analyzis})
