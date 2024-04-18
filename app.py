@@ -1,16 +1,21 @@
 from flask import Flask, request, jsonify, render_template
 from openai import OpenAI
+import openai
 import requests
 import sentiment_text_helpers
 from subprocess import call
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
-openai_client = OpenAI(api_key='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')
-hf_api_url = "https://api-inference.huggingface.co/models/SamLowe/roberta-base-go_emotions"
-headers = {"Authorization": "Bearer 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"}
+openai_client = OpenAI()
 
 def query(payload):
+    hf_api_url = "https://api-inference.huggingface.co/models/SamLowe/roberta-base-go_emotions"
+    headers = {"Authorization": "Bearer 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"}
+
     response = requests.post(hf_api_url, headers=headers, json=payload)
     return response.json()
 
@@ -50,7 +55,13 @@ def generate_questions(input_prompt):
         if 'Question' in sentence:
             out_index.append(idx)
     if out_index:
-        return output_list[min(out_index):max(out_index) + 1]
+        questions = output_list[min(out_index):max(out_index) + 1]
+
+    final_output = ""
+    for question in questions:
+        final_output += f"{question[10:]}\n"
+    return final_output
+
 
 @app.route('/analyze_transcript', methods=['POST']) 
 def analyze_transcript():
