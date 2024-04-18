@@ -77,6 +77,11 @@ def index():
 def transcribe_audio():
     """Takes a file path for an audio file and transcribes it into a string"""
     
+    # open conversation history and record the last couple things said
+    prior = ""
+    with open("conversation_history.txt", 'r') as file:
+        prior = file.read()
+
     if 'audio_data' not in request.files:
         return jsonify({'message': 'No file part'}), 400
 
@@ -101,17 +106,27 @@ def transcribe_audio():
             file=audio_file,
         )
     
-    transcript = transcript.text
+    file = open("conversation_history.txt", "a")
+    file.write(f"{transcript.text}\n")
+    this_answer_transcript = transcript.text
+    prior_and_transcript = prior + this_answer_transcript
     os.remove('audio.webm')
     os.remove('audio.wav')
 
     # run question gen on transcript
-    questions = f"Next interview question: {generate_questions(transcript)}"
+    questions = f"Next interview question: {generate_questions(prior_and_transcript)}"
     # run tone analysis
-    tone_analyzis = f"Your tone result: {analyze_tone(transcript)}"
+    tone_analyzis = f"Your tone result: {analyze_tone(prior_and_transcript)}"
 
-    return jsonify({'message': 'Transcript received', 'transcript': transcript, 'questions': questions, 'tone analysis': tone_analyzis})
+    # open convo history file to write to it
+    file.write(f"\n{questions}\n")
+    file.write(f"{tone_analyzis}\n")
+    file.close()
+
+    return jsonify({'message': 'Transcript received', 'transcript': this_answer_transcript, 'questions': questions, 'tone analysis': tone_analyzis})
 
 
 if __name__ == '__main__':
+    with open("conversation_history.txt", 'w'):
+        pass
     app.run(port=7000, debug=True)
