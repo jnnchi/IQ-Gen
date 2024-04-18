@@ -2,8 +2,6 @@ from flask import Flask, request, jsonify, render_template
 from openai import OpenAI
 import requests
 import sentiment_text_helpers
-#from pydub import AudioSegment
-#from google.cloud import storage # pip install google-cloud-storage 
 from subprocess import call
 import os
 
