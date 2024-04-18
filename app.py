@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify, render_template
 from openai import OpenAI
-import openai
 import requests
 import sentiment_text_helpers
 from subprocess import call
