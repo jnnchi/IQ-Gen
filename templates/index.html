@@ -7,18 +7,50 @@
     <link href="{{url_for('static',filename='styles.css')}}" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <h1>Welcome to Your Mock Interview</h1>
-    <h2>Start practicing now! Record your introduction, and we'll ask questions from there:</h2>
-    <button id="start-record-btn">Start Recording</button>
-    <button id="stop-record-btn" disabled>Stop Recording</button>
-    <p id="usr-msg"></p>
-    <p id="transcript"></p>
-    <div class="output">
-        <h2>Record a response, and we'll output an evaluation here:</h2>
-        <p id="tone-analysis"></p>
-        <p id="questions"></p>
-    </div>
-    <button id="next-question">Next Question</button>
+    <!-- should stay on page -->
+    <nav class="main-menu">
+        <ul>
+            <li><a href="#about">about us</a></li>
+            <li class="logo-container">
+                <img src="{{url_for('static', filename='images/logo.png')}}" alt="Logo">
+            </li>
+            <li><a href="#mock-interview">mock interview</a></li>
+        </ul>
+    </nav>
+
+    <section id="about">
+
+    </section>
+
+    <section id="mock-interview">
+        <div class="interview-participant">
+            <h2 class="header">YOU, THE JOB CANDIDATE</h2>
+            <p id="usr-msg"></p>
+            <div id="transcript">transcript appears here...</div>
+            <button id="start-record-btn">Start Recording</button>
+            <button id="stop-record-btn" disabled>Stop Recording</button>
+        </div>
+
+        <div class="interview-participant">
+            <h2 class="header">YOUR AI INTERVIEWER</h2>
+            <div id="questions">questions are generating...</div>
+            <p id="tone-analysis"></p>
+            <p id="questions"></p>
+            <button type="button" id="next-question">next question</button>
+            <button type="button" id="end-interview">end interview</button>
+        </div>
+    </section>
+
+    <section id="results-section">
+        <h2>YOUR INTERVIEW RESULTS</h2>
+        <div id="results-content">
+            <p id="final-tone-analysis"></p>
+            <div id="logo-container">
+                <span>IQ GEN</span> <!-- Placeholder for the logo -->
+            </div>
+        </div>
+    </section>
+
     <script src="{{url_for('static',filename='script.js')}}"></script>
     <script src="path/to/extendable-media-recorder.js"></script>
     <script src="path/to/extendable-media-recorder-wav-encoder.js"></script>

@@ -1,10 +1,107 @@
 body {
-    background-color: white;
     font-family: "Arial", sans-serif;
     margin: auto;
     margin-top: 50px;
     justify-content: center;
     text-align: center;
+    background-image: url("images/background.png");
+    background-size: cover;
+}
+
+.main-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    list-style: none;
+    color: white;
+  }
+  
+  .main-menu ul {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-left: 20vw;
+    padding-right: 20vw;
+    margin: 0;
+  }
+  
+  .main-menu li {
+    margin: 0;
+    list-style-type: none;
+  }
+  
+  .main-menu a {
+    text-decoration: none;
+    color: white; 
+    font-size: 1.2em;
+    padding: 0.5em 1em;
+    transition: color 0.3s ease;
+  }
+  
+  .main-menu a:hover {
+    color: #aaa; 
+  }
+  
+  /* Logo styles */
+  .logo-container {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .logo-container img {
+    width: 10%; 
+    height: auto;
+    padding: 10px;
+  }
+
+.header {
+    background: rgba(105, 0, 129, 0.6); 
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    margin-top: 0px; 
+    font-style: italic;
+
+}
+
+#mock-interview {
+    display: flex;
+    justify-content: space-around; /* Distribute space between sections */
+    padding: 20px;
+}
+
+.interview-participant {
+    background: rgba(255, 255, 255, 0.8); 
+    color: #000;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* equal width */
+    flex: 1; 
+    /* spacing between elements */
+    margin: 0 10px; 
+}
+
+button {
+    background: #503291; 
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease; 
+}
+
+button:disabled {
+    background: #ccccccb4; 
+    cursor: default;
+}
+
+button:hover:not(:disabled) {
+    /* purple for enabled buttons*/
+    background: #6741b3; 
 }
 
 button {
@@ -26,15 +123,10 @@ button:hover {
     color: #000;
 }
 
-#end {
-    margin-top: 20px;
-}
-
-h2 {
-    font-style: italic;
-}
-
-.output {
-    border: 1px solid black;
-    margin: 50px 50px 50px 50px;
+#transcript,
+#questions {
+    background: #f5f5f5; /* Light gray background for content areas */
+    border-radius: 10px;
+    padding: 20px;
+    min-height: 150px; /* Set a minimum height */
 }
