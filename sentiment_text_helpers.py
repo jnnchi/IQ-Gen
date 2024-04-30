@@ -2,6 +2,11 @@
 # note that these are all written in a way that makes them only good for giving the #1 bit of feedback to a response
 # we may want to go for a different system of making these, like small pieces spliced together, but this works for now
 from openai import OpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
+
+client = OpenAI()
 
 
 system_messages = {
@@ -77,17 +82,38 @@ def flag_disallowed_words(plaintext: str) -> str:
             return ' You also really should avoid using the word ' + word + ' in your response.'
     return ''
 
-client = OpenAI(api_key='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')
 
-def give_sentiment(completed_interview_transcript: str):
+def give_sentiment_full(completed_transcript_path: str):
     """
-    Uses GPT-3.5 Turbo to give a short analysis of how the interview went.
+    Uses GPT-3.5 Turbo to give a short analysis of how the interview went (for end of interview). Takes the file path.
     """
     response = client.chat.completions.create(
     model='gpt-3.5-turbo',
     messages=[
-        {"role": "system", "content": f"You are an human resources representative at a tech company, who is reviewing my interview that was just completed, the {completed_interview_transcript}. focus on three key points, but format it like a response to the user."},
+        {"role": "system", "content": f"You are an human resources representative at a tech company, who is reviewing my interview that was just completed, contained in this transcript: {completed_transcript}. focus on one thing the interviewee did well, and one thing they could improve, but format it like a response to the user."},
         {"role": "user", "content": "How did my interview go! Please tell me the things I did well in my interview, and the things that I could improve upon!"},
+    ],
+    temperature=0,
+    )
+    return response.choices[0].message.content
+
+def give_sentiment_question(completed_transcript_path: str):
+    """
+    GPT-3.5 for the sentiment of one (just completed) question. Takes the file path.
+    """
+    # Reading the transcript and splitting it at new lines, so we can index each line
+    with open(completed_transcript_path, "r") as file:
+        full_transcript = file.read()
+    lines_num = full_transcript.count('\n')
+
+    # Need to grab the correct answer from the transcript:
+    curr_line = full_transcript.split('\n')[lines_num - 5]
+
+    response = client.chat.completions.create(
+    model='gpt-3.5-turbo',
+    messages=[
+        {"role": "system", "content": f"You are an human resources representative at a tech company. You are in the middle of an interview with an interviewee, who just said: {curr_line}. Give them a short, one line response, telling them weather their answer was good or bad, and how they could improve next time."},
+        {"role": "user", "content": "Can you give me a little bit of feedback on how I answered that question?"},
     ],
     temperature=0,
     )
