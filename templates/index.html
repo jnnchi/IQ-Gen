@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LLM Interviewer</title>
     <link href="{{url_for('static',filename='styles.css')}}" rel="stylesheet" type="text/css" />
+    <link href='https://fonts.googleapis.com/css?family=Josefin Sans' rel='stylesheet'>
 </head>
 <body>
     <!-- should stay on page -->
@@ -19,25 +20,37 @@
     </nav>
 
     <section id="about">
-
+        <div class="about-container">
+        <h2 class="header">ABOUT US</h2>
+        <div class="white-box">
+                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                <br><br>
+                Press “get started” to start the interview, and you can speak directly into your mic to answer interview questions!
+            </div>
+            <button>get started!</button>
+        </div>
     </section>
 
     <section id="mock-interview">
         <div class="interview-participant">
             <h2 class="header">YOU, THE JOB CANDIDATE</h2>
-            <p id="usr-msg"></p>
-            <div id="transcript">transcript appears here...</div>
-            <button id="start-record-btn">Start Recording</button>
-            <button id="stop-record-btn" disabled>Stop Recording</button>
+            <div class="white-box">
+                <p id="usr-msg"></p>
+                <div id="transcript">transcript appears here...</div>
+                <button id="start-record-btn">start recording</button>
+                <button id="stop-record-btn" disabled>stop recording</button>
+            </div>
         </div>
 
         <div class="interview-participant">
             <h2 class="header">YOUR AI INTERVIEWER</h2>
-            <div id="questions">questions are generating...</div>
-            <p id="tone-analysis"></p>
-            <p id="questions"></p>
-            <button type="button" id="next-question">next question</button>
-            <button type="button" id="end-interview">end interview</button>
+            <div class="white-box">
+                <div id="questions">questions are generating...</div>
+                <p id="tone-analysis"></p>
+                <p id="questions"></p>
+                <button type="button" id="next-question">next question</button>
+                <button type="button" id="end-interview">end interview</button>
+            </div>
         </div>
     </section>
 
