@@ -157,10 +157,10 @@ nextQuestionButton.addEventListener('click', () => {
     startButton.disabled = false;
     stopButton.disabled = false;
     
-    transcriptElement.textContent = '';
-    questionsElement.textContent = '';
-    toneElement.textContent = '';
-    userMsg.textContent = '';
+    transcriptElement.textContent = 'transcript appears here...';
+    questionsElement.textContent = 'questions are generating...';
+    toneElement.textContent = 'tone analysis will appear here...';
+    userMsg.textContent = 'Start speaking.';
     recognition.stop();
     
     // maybe add the question here?
