@@ -11,11 +11,11 @@
     <!-- should stay on page -->
     <nav class="main-menu">
         <ul>
-            <li><a href="#about">about us</a></li>
+            <li><a id="show-about" href="#about">about us</a></li>
             <li class="logo-container">
                 <img src="{{url_for('static', filename='images/logo.png')}}" alt="Logo">
             </li>
-            <li><a href="#mock-interview">mock interview</a></li>
+            <li><a id="show-interview" href="#mock-interview">mock interview</a></li>
         </ul>
     </nav>
 
@@ -27,41 +27,43 @@
                 <br><br>
                 Press “get started” to start the interview, and you can speak directly into your mic to answer interview questions!
             </div>
-            <button>get started!</button>
+            <button id="get-started">get started!</button>
         </div>
     </section>
 
-    <section id="mock-interview">
-        <div class="interview-participant">
-            <h2 class="header">YOU, THE JOB CANDIDATE</h2>
-            <div class="white-box">
-                <p id="usr-msg"></p>
-                <div id="transcript">transcript appears here...</div>
-                <button id="start-record-btn">start recording</button>
-                <button id="stop-record-btn" disabled>stop recording</button>
+    <section id="full-interview">
+        <section id="mock-interview">
+            <div class="interview-participant">
+                <h2 class="header">YOU, THE JOB CANDIDATE</h2>
+                <div class="white-box">
+                    <p id="usr-msg"></p>
+                    <div id="transcript">transcript appears here...</div>
+                    <button id="start-record-btn">start recording</button>
+                    <button id="stop-record-btn" disabled>stop recording</button>
+                </div>
             </div>
-        </div>
 
-        <div class="interview-participant">
-            <h2 class="header">YOUR AI INTERVIEWER</h2>
-            <div class="white-box">
-                <div id="questions">questions are generating...</div>
-                <p id="tone-analysis"></p>
-                <p id="questions"></p>
-                <button type="button" id="next-question">next question</button>
-                <button type="button" id="end-interview">end interview</button>
+            <div class="interview-participant">
+                <h2 class="header">YOUR AI INTERVIEWER</h2>
+                <div class="white-box">
+                    <div id="questions">questions are generating...</div>
+                    <p id="tone-analysis"></p>
+                    <p id="questions"></p>
+                    <button type="button" id="next-question">next question</button>
+                    <button type="button" id="end-interview">end interview</button>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="results-section">
-        <h2>YOUR INTERVIEW RESULTS</h2>
-        <div id="results-content">
-            <p id="final-tone-analysis"></p>
-            <div id="logo-container">
-                <span>IQ GEN</span> <!-- Placeholder for the logo -->
+        <section id="results-section">
+            <h2>YOUR INTERVIEW RESULTS</h2>
+            <div id="results-content">
+                <p id="final-tone-analysis"></p>
+                <div id="logo-container">
+                    <span>IQ GEN</span> <!-- Placeholder for the logo -->
+                </div>
             </div>
-        </div>
+        </section>
     </section>
 
     <script src="{{url_for('static',filename='script.js')}}"></script>

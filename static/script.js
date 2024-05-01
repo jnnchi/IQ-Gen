@@ -1,5 +1,28 @@
-// NEW
-// https://franzeus.medium.com/record-audio-in-js-and-upload-as-wav-or-mp3-file-to-your-backend-1a2f35dea7e8
+function showAbout() {
+    document.getElementById('about').style.display = 'block';
+    document.getElementById('full-interview').style.display = 'none';
+}
+
+showAbout();
+
+document.getElementById('show-about').addEventListener('click', function() {
+    showAbout();
+});
+
+function showInterview() {
+    document.getElementById('about').style.display = 'none';
+    document.getElementById('full-interview').style.display = 'block';
+}
+
+document.getElementById('show-interview').addEventListener('click', function() {
+    showInterview();
+});
+
+document.getElementById('get-started').addEventListener('click', function() {
+    showInterview();
+});
+
+
 /* ------------------ RECORD AUDIO USING JS --------------------- */
 let mediaRecorder = null;
 let audioBlobs = [];
