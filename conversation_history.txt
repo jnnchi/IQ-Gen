@@ -1,0 +1,14 @@
+Hello, I'm a web developer. I'm interviewing for the straw position.
+
+Next interview question: Hi there! Can you tell us about a particularly challenging
+
+Hello, I'm a web developer interested in applying for this position. 你好,你会听懂中文吗? 我是一个计算机的高学生。
+
+Next interview question: Hello! Can you tell us about a particularly challenging web development project you have worked on and how you overcame obstacles during the process? 
+How do you stay updated on the latest web development trends and technologies?
+
+Hi, my name is Bob. I'm interviewing for your job position as a web developer.
+
+Next interview question: Hello Bob! Can you tell us about a particularly challenging e-commerce project you worked on and how you ensured a smooth user experience? 
+How do you approach testing and debugging in your web
+
