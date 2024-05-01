@@ -96,6 +96,7 @@ function startRecording() {
 
 
 function stopRecording() {
+    document.getElementById('loader-wrapper').style.display = 'flex';
     return new Promise((resolve, reject) => {
         if (!mediaRecorder) {
             reject(new Error("MediaRecorder not initialized"));
@@ -147,6 +148,7 @@ async function sendAudioToServer(audioBlob) {
     .catch(error => {
         console.error('Error sending audio to server:', error);
     });
+    document.getElementById('loader-wrapper').style.display = 'none';
 }
 
 let nextQuestionButton = document.getElementById('next-question');
