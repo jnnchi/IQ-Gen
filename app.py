@@ -62,19 +62,6 @@ def generate_questions(input_prompt):
     return final_output
 
 
-@app.route('/analyze_transcript', methods=['POST']) 
-def analyze_transcript():
-    # get data from speech recognition
-    data = request.json
-    transcript = data['transcript']
-
-    # run question gen on transcript
-    questions = f"Next interview question: {generate_questions(transcript)}"
-    # run tone analysis
-    tone_analyzis = f"IQ-GEN: {sentiment_text_helpers.give_sentiment_full(transcript)}"
-
-    return jsonify({'message': 'Transcript received', 'questions': questions, 'tone analysis': tone_analyzis})
-
 # homepage
 @app.route('/')
 def index():
