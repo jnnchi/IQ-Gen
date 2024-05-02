@@ -165,3 +165,12 @@ nextQuestionButton.addEventListener('click', () => {
     
     // maybe add the question here?
 });
+
+
+/* ------------------ END INTERVIEW --------------------- */
+let endInterviewButton = document.getElementById('end-interview');
+
+endInterviewButton.addEventListener('click', () => {
+    // send signal to python that interview has ended
+    // receive full tone analysis back
+});
