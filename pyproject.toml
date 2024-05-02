@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "LLM-interviewer"
+version = "0.0.1"
+authors = [
+  { name="jnnchi"},
+  { name="gabe-mc"},
+  { name="Toyakki"},
+  { name="Max"},
+]
+description = "A llm model which plays a role of software engineering interviewer."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/jnnchi/LLM-Interviewer"
+Issues = "https://github.com/jnnchi/LLM-Interviewer/issues"
