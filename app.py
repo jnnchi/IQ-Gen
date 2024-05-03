@@ -18,21 +18,21 @@ def query(payload):
     response = requests.post(hf_api_url, headers=headers, json=payload)
     return response.json()
 
-def analyze_tone(user_response):
-    # this is where the output emotion is generated
-    output = query({
-        "inputs": user_response.lower(),
-    })
+# def analyze_tone(user_response):
+#     # this is where the output emotion is generated
+#     output = query({
+#         "inputs": user_response.lower(),
+#     })
 
-    # this next variable is where all the possible feedback functions are added into
-    feedback = (
-        sentiment_text_helpers.system_messages[output[0][0]['label']]
-        + sentiment_text_helpers.flag_overused_words(user_response.lower())
-        + sentiment_text_helpers.flag_disallowed_words(user_response.lower())
-        + sentiment_text_helpers.flag_um(user_response.lower())
-    )
+#     # this next variable is where all the possible feedback functions are added into
+#     feedback = (
+#         sentiment_text_helpers.system_messages[output[0][0]['label']]
+#         + sentiment_text_helpers.flag_overused_words(user_response.lower())
+#         + sentiment_text_helpers.flag_disallowed_words(user_response.lower())
+#         + sentiment_text_helpers.flag_um(user_response.lower())
+#     )
 
-    return feedback
+#     return feedback
 
 def generate_questions(input_prompt):
     with open('template.txt', 'r') as file:
@@ -61,19 +61,6 @@ def generate_questions(input_prompt):
         final_output += f"{question[10:]}\n"
     return final_output
 
-
-@app.route('/analyze_transcript', methods=['POST']) 
-def analyze_transcript():
-    # get data from speech recognition
-    data = request.json
-    transcript = data['transcript']
-
-    # run question gen on transcript
-    questions = f"Next interview question: {generate_questions(transcript)}"
-    # run tone analysis
-    tone_analyzis = f"Your tone result: {analyze_tone(transcript)}"
-
-    return jsonify({'message': 'Transcript received', 'questions': questions, 'tone analysis': tone_analyzis})
 
 # homepage
 @app.route('/')
@@ -117,14 +104,18 @@ def transcribe_audio():
     file = open("conversation_history.txt", "a")
     file.write(f"{transcript.text}\n")
     this_answer_transcript = transcript.text
+
     prior_and_transcript = prior + this_answer_transcript
+
     os.remove('audio.webm')
     os.remove('audio.wav')
 
     # run question gen on transcript
     questions = f"Next interview question: {generate_questions(prior_and_transcript)}"
+
     # run tone analysis
-    tone_analyzis = f"Your tone result: {analyze_tone(prior_and_transcript)}"
+    tone_single = sentiment_text_helpers.give_sentiment_question(this_answer_transcript)
+    tone_analyzis = f"IQ-GEN: {tone_single}"
 
     # open convo history file to write to it
     file.write(f"\n{questions}\n")
