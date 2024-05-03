@@ -204,3 +204,8 @@ button:hover:not(:disabled) {
     margin-right: 10vw;
     height: 200px;
 }
+
+#end-interview a {
+  text-decoration: none;
+  color: #fff;
+}

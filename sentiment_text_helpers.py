@@ -89,8 +89,9 @@ def give_sentiment_full(completed_interview: str):
     """
     only_questions = ''
     for line in completed_interview.split("\n"):
-        if (line[0] == '') or (line[0] == 'N' and line[2] == 'e'):
-            continue
+        if len(line) > 2:
+            if (line[0] == '') or (line[0] == 'N' and line[2] == 'e'):
+                continue
         else:
             only_questions += str(line)
 

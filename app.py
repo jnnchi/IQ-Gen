@@ -124,6 +124,14 @@ def transcribe_audio():
     return jsonify({'message': 'Transcript received', 'transcript': this_answer_transcript, 'questions': questions, 'tone analysis': tone_analyzis})
 
 
+@app.route('/finaltone', methods=['POST']) 
+def return_tone_results():
+    with open("conversation_history.txt", 'r') as file:
+        transcript = file.read()
+    
+    return jsonify({'message': "End of interview data processing.", 'sentiment-results': sentiment_text_helpers.give_sentiment_full(transcript)})
+
+
 if __name__ == '__main__':
     with open("conversation_history.txt", 'w'):
         pass

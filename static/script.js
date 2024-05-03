@@ -169,8 +169,30 @@ nextQuestionButton.addEventListener('click', () => {
 
 /* ------------------ END INTERVIEW --------------------- */
 let endInterviewButton = document.getElementById('end-interview');
+let finalToneAnalysis = document.getElementById('final-tone-analysis');
 
 endInterviewButton.addEventListener('click', () => {
-    // send signal to python that interview has ended
-    // receive full tone analysis back
+    document.getElementById('loader-wrapper').style.display = 'flex';
+
+    // send a POST request to the server to process the final tone analysis
+    fetch('/finaltone', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ message: "End of interview data processing." })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Tone Analysis:', data);
+        finalToneAnalysis.textContent = 'Final Tone Analysis: ' + data['sentiment-results']; 
+    })
+    .catch(error => {
+        console.error('Error fetching final tone analysis:', error);
+        userMsg.textContent = 'Error fetching final tone analysis.';
+    })
+    .finally(() => {
+        // hide loader
+        document.getElementById('loader-wrapper').style.display = 'none';
+    });
 });
