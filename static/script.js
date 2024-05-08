@@ -1,5 +1,28 @@
-// NEW
-// https://franzeus.medium.com/record-audio-in-js-and-upload-as-wav-or-mp3-file-to-your-backend-1a2f35dea7e8
+function showAbout() {
+    document.getElementById('about').style.display = 'block';
+    document.getElementById('full-interview').style.display = 'none';
+}
+
+showAbout();
+
+document.getElementById('show-about').addEventListener('click', function() {
+    showAbout();
+});
+
+function showInterview() {
+    document.getElementById('about').style.display = 'none';
+    document.getElementById('full-interview').style.display = 'block';
+}
+
+document.getElementById('show-interview').addEventListener('click', function() {
+    showInterview();
+});
+
+document.getElementById('get-started').addEventListener('click', function() {
+    showInterview();
+});
+
+
 /* ------------------ RECORD AUDIO USING JS --------------------- */
 let mediaRecorder = null;
 let audioBlobs = [];
@@ -73,6 +96,7 @@ function startRecording() {
 
 
 function stopRecording() {
+    document.getElementById('loader-wrapper').style.display = 'flex';
     return new Promise((resolve, reject) => {
         if (!mediaRecorder) {
             reject(new Error("MediaRecorder not initialized"));
@@ -124,6 +148,7 @@ async function sendAudioToServer(audioBlob) {
     .catch(error => {
         console.error('Error sending audio to server:', error);
     });
+    document.getElementById('loader-wrapper').style.display = 'none';
 }
 
 let nextQuestionButton = document.getElementById('next-question');
@@ -132,11 +157,42 @@ nextQuestionButton.addEventListener('click', () => {
     startButton.disabled = false;
     stopButton.disabled = false;
     
-    transcriptElement.textContent = '';
-    questionsElement.textContent = '';
-    toneElement.textContent = '';
-    userMsg.textContent = '';
+    transcriptElement.textContent = 'transcript appears here...';
+    questionsElement.textContent = 'questions are generating...';
+    toneElement.textContent = 'tone analysis will appear here...';
+    userMsg.textContent = 'Start speaking.';
     recognition.stop();
     
     // maybe add the question here?
+});
+
+
+/* ------------------ END INTERVIEW --------------------- */
+let endInterviewButton = document.getElementById('end-interview');
+let finalToneAnalysis = document.getElementById('final-tone-analysis');
+
+endInterviewButton.addEventListener('click', () => {
+    document.getElementById('loader-wrapper').style.display = 'flex';
+
+    // send a POST request to the server to process the final tone analysis
+    fetch('/finaltone', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ message: "End of interview data processing." })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Tone Analysis:', data);
+        finalToneAnalysis.textContent = 'Final Tone Analysis: ' + data['sentiment-results']; 
+    })
+    .catch(error => {
+        console.error('Error fetching final tone analysis:', error);
+        userMsg.textContent = 'Error fetching final tone analysis.';
+    })
+    .finally(() => {
+        // hide loader
+        document.getElementById('loader-wrapper').style.display = 'none';
+    });
 });
