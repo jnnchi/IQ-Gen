@@ -18,21 +18,6 @@ def query(payload):
     response = requests.post(hf_api_url, headers=headers, json=payload)
     return response.json()
 
-# def analyze_tone(user_response):
-#     # this is where the output emotion is generated
-#     output = query({
-#         "inputs": user_response.lower(),
-#     })
-
-#     # this next variable is where all the possible feedback functions are added into
-#     feedback = (
-#         sentiment_text_helpers.system_messages[output[0][0]['label']]
-#         + sentiment_text_helpers.flag_overused_words(user_response.lower())
-#         + sentiment_text_helpers.flag_disallowed_words(user_response.lower())
-#         + sentiment_text_helpers.flag_um(user_response.lower())
-#     )
-
-#     return feedback
 
 def generate_questions(input_prompt):
     with open('template.txt', 'r') as file:
@@ -80,10 +65,6 @@ def transcribe_audio():
     if 'audio_data' not in request.files:
         return jsonify({'message': 'No file part'}), 400
 
-    # https://werkzeug.palletsprojects.com/en/3.0.x/datastructures/
-    # audio file is type werkzeug.datastructures.file_storage.FileStorage
-    # has attributes .stream, .filename, .content_type
-    # has method .read() that reads it to bytes
     audio_file = request.files['audio_data']
 
     # initially save to webm (that's the type it's sent in too)
@@ -92,9 +73,6 @@ def transcribe_audio():
     # convert webm to wav using call function
     call(['ffmpeg', '-i', 'audio.webm', '-ar', '16000', '-ac', '1', 'audio.wav'])
 
-    # no longer using; can just open file directly
-    # wav_file = AudioSegment.from_file(file="audio.wav", format="wav")
-    
     with open('audio.wav', 'rb') as audio_file:
         transcript = openai_client.audio.transcriptions.create(
             model="whisper-1",
@@ -111,7 +89,7 @@ def transcribe_audio():
     os.remove('audio.wav')
 
     # run question gen on transcript
-    questions = f"Next interview question: {generate_questions(prior_and_transcript)}"
+    questions = f"Question: {generate_questions(prior_and_transcript)}"
 
     # run tone analysis
     tone_single = sentiment_text_helpers.give_sentiment_question(this_answer_transcript)
