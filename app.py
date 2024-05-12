@@ -93,7 +93,7 @@ def transcribe_audio():
 
     # run tone analysis
     tone_single = sentiment_text_helpers.give_sentiment_question(this_answer_transcript)
-    tone_analyzis = f"IQ-GEN: {tone_single}"
+    tone_analyzis = f"Feedback: {tone_single}"
 
     # open convo history file to write to it
     file.write(f"\n{questions}\n")

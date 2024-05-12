@@ -204,11 +204,7 @@ button:hover:not(:disabled) {
 
     margin-right: 10vw;
     height: 200px;
-    padding-bottom: 40vh;
-}
-
-#final-tone-analysis {
-  margin-bottom: 30px;
+    padding-bottom: 20vh;
 }
 
 #end-interview a {
