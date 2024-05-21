@@ -110,6 +110,7 @@ def return_tone_results():
     return jsonify({'message': "End of interview data processing.", 'sentiment-results': sentiment_text_helpers.give_sentiment_full(transcript)})
 
 
+
 def main():
     with open("conversation_history.txt", 'w'):
         pass
