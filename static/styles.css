@@ -9,21 +9,23 @@ body {
 }
 
 .main-menu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1em;
-    list-style: none;
-    color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+  list-style: none;
+  color: white;
+  position: relative;
+  padding-bottom: 40px;
 }
 
 .main-menu ul {
   display: flex;
   width: 100%;
   justify-content: space-between;
-  padding-left: 20vw;
-  padding-right: 20vw;
+  padding: 0 20vw;
   margin: 0;
+  position: relative;
 }
 
 .main-menu li {
@@ -33,27 +35,33 @@ body {
 
 .main-menu a {
   text-decoration: none;
-  color: white; 
+  color: white;
   font-size: 1.2em;
   padding: 0.5em 1em;
   transition: color 0.3s ease;
 }
 
 .main-menu a:hover {
-  color: #aaa; 
+  color: #aaa;
 }
 
 /* Logo styles */
 .logo-container {
-  flex: 1;
-  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 1%;
+  bottom: 1%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo-container img {
-  width: 10%; 
+  width: 30%;
   height: auto;
-  padding: 10px;
 }
+
 
 .about-container {
   margin-left: 25vw;
