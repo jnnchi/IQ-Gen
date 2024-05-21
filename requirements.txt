@@ -1,3 +1,4 @@
 Flask
 openai
-python-dotenv
+subprocess
+dotenv

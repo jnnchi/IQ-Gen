@@ -11,7 +11,7 @@ authors = [
   { name="Toyakki"},
   { name="Max"},
 ]
-description = "A llm model which plays a role of software engineering interviewer."
+description = "A LLM model which plays a role of software engineering interviewer."
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
@@ -19,6 +19,9 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+
+[project.scripts]
+run_llm_interviewer = "app:main"
 
 [project.urls]
 Homepage = "https://github.com/jnnchi/LLM-Interviewer"

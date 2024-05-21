@@ -1,3 +1,4 @@
+// showing pages depending on tab clicked
 function showAbout() {
     document.getElementById('about').style.display = 'block';
     document.getElementById('full-interview').style.display = 'none';
@@ -158,12 +159,10 @@ nextQuestionButton.addEventListener('click', () => {
     stopButton.disabled = false;
     
     transcriptElement.textContent = 'transcript appears here...';
-    questionsElement.textContent = 'questions are generating...';
+    //questionsElement.textContent = 'questions are generating...';
     toneElement.textContent = 'tone analysis will appear here...';
     userMsg.textContent = 'Start speaking.';
     recognition.stop();
-    
-    // maybe add the question here?
 });
 
 
