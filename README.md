@@ -18,29 +18,35 @@ Make sure you have the following installed on your machine:
 
 ```sh
 https://github.com/jnnchi/IQ-Gen.git
+```
 
 4. Navigate into the project directory.
 
 ```sh
 cd your-repository
+```
 
 5. Create a virtual environment.
 
 ```sh
 python -m venv venv
+```
 
 6. Activate the virtual environment.
 
 For Windows
 ```sh
 venv\Scripts\activate
+```
 
 For macOS and Linux
 ```sh
 source venv/bin/activate
+```
 
 ### Install the dependencies
 
 1. Install required packages using pip.
 ```sh
 pip install -r requirements.txt
+```
