@@ -1,5 +1,5 @@
 # IQ-Gen's LLM Interviewer
-IQ-gen is a project created as part of the UTMIST LLM Acceleration program, and aims to help young professionals prepare for behavioral interviews by utilizing a large language model to generate personalized interview questions. Users are able answer questions by speaking directly to their computer and will receive responses and follow-up questions from a virtual interviewer. The program will then analyze the response, and provide feedback on the user's word choice and the overall quality of the user’s response.
+IQ-Gen is a project created as part of the UTMIST LLM Acceleration program, and aims to help young professionals prepare for behavioral interviews by utilizing a large language model to generate personalized interview questions. Users are able answer questions by speaking directly to their computer and will receive responses and follow-up questions from a virtual interviewer. The program will then analyze the response, and provide feedback on the user's word choice and the overall quality of the user’s response.
 
 ## Prerequisites
 
