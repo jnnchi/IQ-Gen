@@ -74,7 +74,7 @@ python app.py
 7. When you want to end the interview, click ‘end interview’. This will bring you to a results page with an analysis of your interview
 
 ## (Optional) PyPi Installation - Python Files Only
-Visit this link to install our Python package: [PyPi Installation](https://test.pypi.org/project/LLM-interviewer/0.0.2/). This will download **only the Python files of our project**. To download the full project, please follow the instructions for cloning from Github above.
+Visit this link to install our Python package: [PyPi Installation](https://pypi.org/project/IQ-gen/0.1.1/). This will download **only the Python files of our project**. To download the full project, please follow the instructions for cloning from Github above.
 
 1. Scroll down until you see a Navigation menu on the left side of the screen. 
 
