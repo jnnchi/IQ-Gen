@@ -1,4 +1,4 @@
-# IQ-Gen's LLM Interviewer
+<img width="1274" alt="Screenshot 2024-06-03 at 6 02 48 PM" src="https://github.com/jnnchi/IQ-Gen/assets/104039775/9007a54b-8a2e-45a9-9b79-7add29a0e6c6"># IQ-Gen's LLM Interviewer
 IQ-Gen is a project created as part of the UTMIST LLM Acceleration program, and aims to help young professionals prepare for behavioral interviews by utilizing a large language model to generate personalized interview questions. Users are able answer questions by speaking directly to their computer and will receive responses and follow-up questions from a virtual interviewer. The program will then analyze the response, and provide feedback on the user's word choice and the overall quality of the user’s response.
 
 ## Prerequisites
@@ -70,8 +70,11 @@ python app.py
 <img width="500" alt="Screenshot 2024-06-02 at 7 28 11 AM" src="https://github.com/jnnchi/IQ-Gen/assets/70595899/eaa71554-ab24-44ae-9a58-469c4721b408">
 
 6. After you have read your feedback, When you are ready for your next interview question, click ‘next question’.
+<img width="500" alt="Screenshot 2024-06-03 at 6 02 48 PM" src="https://github.com/jnnchi/IQ-Gen/assets/104039775/1fa710f3-deb4-4f2c-a906-e22a0db1811e">
 
 7. When you want to end the interview, click ‘end interview’. This will bring you to a results page with an analysis of your interview
+<img width="500" alt="Screenshot 2024-06-03 at 6 07 22 PM" src="https://github.com/jnnchi/IQ-Gen/assets/104039775/26db747f-9cd5-4442-bac2-169500e85b23">
+
 
 ## (Optional) PyPi Installation - Python Files Only
 Visit this link to install our Python package: [PyPi Installation](https://pypi.org/project/IQ-gen/0.1.1/). This will download **only the Python files of our project**. To download the full project, please follow the instructions for cloning from Github above.
