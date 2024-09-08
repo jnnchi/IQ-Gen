@@ -24,26 +24,30 @@ def generate_questions(input_prompt):
         template = file.read()
 
     # when user enters a new sentence, they won't type "Sentence: " first, so we do that
-    input_prompt = 'Sentence: ' + input_prompt
+    input_prompt = 'Generate interview questions based on the given conversation context. Sentence: ' + input_prompt
     # pass the input prompt AND the template into the completions create function
     prompt = template + input_prompt
     # more tokens means longer responses, higher temperature means more creative responses
     completion = openai_client.completions.create(model='gpt-3.5-turbo-instruct', prompt=str(prompt), max_tokens=64, temperature=0.7)
-    
+    print(completion)
     # extract the text section of completion object
     message = completion.choices[0].text
     
     output_list = message.split('\n')
     out_index = []
+    questions = None
     for idx, sentence in enumerate(output_list):
         if 'Question' in sentence:
             out_index.append(idx)
     if out_index:
         questions = output_list[min(out_index):max(out_index) + 1]
 
-    final_output = ""
-    for question in questions[:2]:
-        final_output += f"{question[10:]}\n"
+    if not questions:
+        final_output = "Can you tell us about a time when you had to balance user needs with technical constraints while developing an application?"
+    else:
+        final_output = ""
+        for question in questions[:2]:
+            final_output += f"{question[10:]}\n"
     return final_output
 
 
@@ -114,7 +118,7 @@ def return_tone_results():
 def main():
     with open("conversation_history.txt", 'w'):
         pass
-    app.run(port=7000, debug=True)
+    app.run(port=6000, debug=True)
 
 
 if __name__ == '__main__':
