@@ -23,7 +23,7 @@ def give_sentiment_full(completed_interview: str):
     response = client.chat.completions.create(
     model='gpt-3.5-turbo',
     messages=[
-        {"role": "system", "content": f"You are an human resources representative at a tech company, who is reviewing my interview that was just completed, contained in this transcript: {only_questions}. focus on one thing I did well and one thing I could improve. Format it like a sentance"},
+        {"role": "system", "content": f"You are an human resources representative at a tech company, who is reviewing my interview that was just completed, contained in this transcript: {only_questions}. focus on one thing I did well and one or two things I could improve. Format it like a sentance"},
         {"role": "user", "content": "How did my interview go? Tell me the things I did poorly, and the things I did well. Do not talk at all about my body language, only focus on my verbal responses."},
     ],
     temperature=0,
@@ -37,7 +37,7 @@ def give_sentiment_question(curr_line: str):
     response = client.chat.completions.create(
     model='gpt-3.5-turbo',
     messages=[
-        {"role": "system", "content": f"You are an human resources representative at a tech company. You are in the middle of an interview with an interviewee, who just said: {curr_line}. Give them a short, one line response, telling them weather their answer was good or bad, and how they could improve next time."},
+        {"role": "system", "content": f"You are an human resources representative at a tech company. You are in the middle of an interview with an interviewee, who just said: {curr_line}. Give them a short, one line response, telling them weather their answer was good or bad, and how they could improve next time. If the response was really good, dont give any feedback, just say that nothing could be improved"},
         {"role": "user", "content": "Can you give me a little bit of feedback on how I answered that question?"},
     ],
     temperature=0,
