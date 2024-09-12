@@ -184,7 +184,7 @@ endInterviewButton.addEventListener('click', () => {
     .then(response => response.json())
     .then(data => {
         console.log('Tone Analysis:', data);
-        finalToneAnalysis.textContent = 'Final Tone Analysis: ' + data['sentiment-results']; 
+        finalToneAnalysis.textContent = 'Final Interview Feedback: ' + data['sentiment-results']; 
     })
     .catch(error => {
         console.error('Error fetching final tone analysis:', error);

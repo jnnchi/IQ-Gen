@@ -1,15 +1,20 @@
 Sentence: Hello, my name is John Jones. I’m currently a software engineer at Google and have a wide breadth of experience researching and designing software programs and innovative solutions that solve real-world problems. I’ve developed new architecture for network equipment systems, from routers to voice-enabled network applications. I’ve been a huge fan of your company for years, and saw that you had an opening for a principal software engineer manager. I would love to be considered for this position.
 Question: Hello John Jones! Can you describe a particularly challenging software program you researched and designed? 
+Question: Hi John Jones! I'm interested learning more about your research experience, but first, can you tell me how you think working at Google has shaped you?
 Question: What innovative solutions did you implement to overcome those challenges?
 Sentence: Hi, I’m Sally Smith. As a civil engineering manager at General Motors for the past two years, I’ve led multiple cross-functional teams in conceiving, designing, and maintaining large infrastructure projects in the public and private sectors. Notably, utilizing my geotechnical engineering experience, I was recently able to move forward on developing a large chip manufacturing facility for a major company.
 Question: Hello Sally Smith! Can you walk us through the most challenging geotechnical engineering problem you faced in your infrastructure projects and how you resolved it? 
 Question: As a manager leading cross-functional teams, how do you ensure effective communication and collaboration among team members with diverse expertise?
 Sentence: I'm Alex Rodriguez, a network security specialist with Cisco Systems, where I have developed and implemented robust security protocols for our cloud services. My expertise lies in cybersecurity, threat analysis, and developing scalable security solutions.
-Question: Can you describe a complex cybersecurity threat you encountered and how you developed a solution for it?
-Question: How do you approach the balance between robust security and user accessibility in your designs?
-Question: What strategies do you employ for staying ahead of emerging cybersecurity threats in cloud services?
+Question: Im glad to hear your area of expertise is similar to the requirements of the role we're trying to fill. Can you tell me more about what cloud serives you have worked with?
+Question: Very nice to meet you Alex. Can you describe a complex cybersecurity threat you encountered and how you developed a solution for it?
+Question: Awesome. I've Cisco must have been a fun workplace. So, how do you approach the balance between robust security and user accessibility in your designs?
+Question: Hi Alex! Let me ask you, what strategies would you employ for staying ahead of emerging cybersecurity threats in cloud services?
 Sentence: My name is Emily Chen, and I am a data scientist with a focus on machine learning and AI at Amazon. I have led projects involving predictive analytics and natural language processing, contributing significantly to improving user experience and personalization in our services.
-Question: Can you share an example of a predictive analytics project you led at Amazon and the impact it had?
+Question: Great. Now, can you share an example of a predictive analytics project you led at Amazon and the impact it had?
 Question: How have you approached challenges in natural language processing, especially regarding model accuracy and efficiency?
 Question: In your role, how have you ensured the ethical use of AI and machine learning, particularly in user data handling?
-
+Question: Very interesting. I'd love to learn more about the specifics of your project, but for now, can you tell me how have you ensured the ethical use of AI and machine learning, particularly in user data handling?
+Sentance: I have worked extensivly with tools such as SQL, MySQL, MongoDB, as well as Python libaries such as Pandas for data analysis.
+Question: Great to hear. Can you tell me a little more about how you impliment those tools in your projects?
+Question: Awesome. We're looking for someone who has had experience with a large variety of tools and has worked on a variety of devolopment enviroments. Can you tell me about how you can use your past experiences in SQL and MongoDB in this job?
