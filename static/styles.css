@@ -16,14 +16,14 @@ body {
   list-style: none;
   color: white;
   position: relative;
-  padding-bottom: 40px;
+  padding-bottom: 55px;
 }
 
 .main-menu ul {
   display: flex;
   width: 100%;
   justify-content: space-between;
-  padding: 0 20vw;
+  padding: 0 35vw;
   margin: 0;
   position: relative;
 }
@@ -58,7 +58,7 @@ body {
 }
 
 .logo-container img {
-  width: 30%;
+  width: 50%;
   height: auto;
 }
 
