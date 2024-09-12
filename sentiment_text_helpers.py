@@ -23,8 +23,8 @@ def give_sentiment_full(completed_interview: str):
     response = client.chat.completions.create(
     model='gpt-3.5-turbo',
     messages=[
-        {"role": "system", "content": f"You are an human resources representative at a tech company, who is reviewing my interview that was just completed, contained in this transcript: {only_questions}. focus on one thing the interviewee did well and one thing they could improve, but format it like a response to the user."},
-        {"role": "user", "content": "How did my interview go! Please tell me the things I did well in my interview, and the things that I could improve upon!"},
+        {"role": "system", "content": f"You are an human resources representative at a tech company, who is reviewing my interview that was just completed, contained in this transcript: {only_questions}. focus on one thing I did well and one thing I could improve. Format it like a sentance"},
+        {"role": "user", "content": "How did my interview go? Tell me the things I did poorly, and the things I did well. Do not talk at all about my body language, only focus on my verbal responses."},
     ],
     temperature=0,
     )
