@@ -13,6 +13,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1em;
+  background-color: transparent;
   list-style: none;
   color: white;
   position: relative;
@@ -21,15 +22,16 @@ body {
 
 .main-menu ul {
   display: flex;
-  width: 100%;
   justify-content: space-between;
-  padding: 0 35vw;
+  align-items: center;
+  width: 100%;
+  padding: 0; 
   margin: 0;
   position: relative;
 }
 
 .main-menu li {
-  margin: 0;
+  margin: 0 15em 0 15em; 
   list-style-type: none;
 }
 
@@ -45,21 +47,25 @@ body {
   color: #aaa;
 }
 
-/* Logo styles */
 .logo-container {
-  position: absolute;
-  left: 50%;
-  top: 1%;
-  bottom: 1%;
-  transform: translateX(-50%);
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .logo-container img {
-  width: 50%;
+  width: 80px; 
   height: auto;
+}
+
+/* Ensuring proper alignment for the links */
+.main-menu li:first-child {
+  margin-right: auto;
+}
+
+.main-menu li:last-child {
+  margin-left: auto;
 }
 
 
