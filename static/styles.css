@@ -13,25 +13,22 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1em;
-  background-color: transparent;
   list-style: none;
   color: white;
   position: relative;
-  padding-bottom: 55px;
+  padding-bottom: 40px;
 }
 
 .main-menu ul {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
-  padding: 0; 
+  justify-content: space-between;
+  padding: 0 20vw;
   margin: 0;
   position: relative;
 }
 
 .main-menu li {
-  margin: 0 15em 0 15em; 
   list-style-type: none;
 }
 
@@ -48,14 +45,18 @@ body {
 }
 
 .logo-container {
-  flex: 1;
+  position: absolute;
+  left: 50%;
+  top: 1%;
+  bottom: 1%;
+  transform: translateX(-50%);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .logo-container img {
-  width: 80px; 
+  width: 30%;
   height: auto;
 }
 
