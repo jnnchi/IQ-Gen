@@ -24,7 +24,7 @@ def generate_questions(input_prompt):
         template = file.read()
 
     # when user enters a new sentence, they won't type "Sentence: " first, so we do that
-    input_prompt = 'Generate responses and interview questions based on the given conversation context. Sentence: ' + input_prompt
+    input_prompt = 'You are interviewing a candidate for a software engineering job in a behavioral interview. Generate responses and interview questions based on the given conversation context. Sentence: ' + input_prompt
     # pass the input prompt AND the template into the completions create function
     prompt = template + input_prompt
     # more tokens means longer responses, higher temperature means more creative responses

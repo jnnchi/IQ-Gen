@@ -23,8 +23,8 @@ def give_sentiment_full(completed_interview: str):
     response = client.chat.completions.create(
     model='gpt-3.5-turbo',
     messages=[
-        {"role": "system", "content": f"You are an human resources representative at a tech company, who is reviewing my interview that was just completed, contained in this transcript: {only_questions}. focus on one thing I did well and one or two things I could improve. Format it like a sentance"},
-        {"role": "user", "content": "How did my interview go? Tell me the things I did poorly, and the things I did well. Do not talk at all about my body language, only focus on my verbal responses."},
+        {"role": "system", "content": f"You are an human resources representative at a tech company, who is reviewing my interview that was just completed, contained in this transcript: {only_questions}. Include a brief description of what I did well, and full description on what I could improve. Format this reponse in paragraph form; it should be at most 6 sentences."},
+        {"role": "user", "content": "What did I do poorly or do well during this interview? Give constructive criticism. Do not talk at all about my body language, only focus on my verbal responses. End with concrete tips on how to improve next time."},
     ],
     temperature=0,
     )
@@ -37,8 +37,8 @@ def give_sentiment_question(curr_line: str):
     response = client.chat.completions.create(
     model='gpt-3.5-turbo',
     messages=[
-        {"role": "system", "content": f"You are an human resources representative at a tech company. You are in the middle of an interview with an interviewee, who just said: {curr_line}. Give them a short, one line response, telling them weather their answer was good or bad, and how they could improve next time. If the response was really good, dont give any feedback, just say that nothing could be improved"},
-        {"role": "user", "content": "Can you give me a little bit of feedback on how I answered that question?"},
+        {"role": "system", "content": f"You are an human resources representative at a tech company. You are in the middle of an interview with an interviewee, who just said: {curr_line}. Give them a concise, two line response about what was good and what can be improved about their response. If the response was really good, explain why it was a good response and encourage them to use it again."},
+        {"role": "user", "content": "Give me feedback on how I answered that question from the perspective of an interviewer, including feedback on the tone of my response. Do not start your response with 'Yes' or 'Sure', go directly into the feedback."},
     ],
     temperature=0,
     )
